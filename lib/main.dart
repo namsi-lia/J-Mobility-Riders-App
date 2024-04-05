@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:jmobility_riders/ui/screens/SplashScreen.dart';
+import 'package:jmobility_riders/lang/codegen_loader.g.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -8,20 +9,23 @@ void main() async {
 
   runApp(
     EasyLocalization(
-        supportedLocales: [Locale('en', 'US'), Locale('de', 'DE')],
-        path: 'assets/lang', // <-- change the path of the translation files
-        fallbackLocale: Locale('en', 'US'),
-        child: MyApp()),
+        supportedLocales: const [Locale('en', 'US'), Locale('de', 'DE')],
+        path: 'assests/lang', // <-- change the path of the translation files
+        fallbackLocale: const Locale('en'),
+        assetLoader: const CodegenLoader(),
+        child: const MyApp()),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        home: Container());
+        home: const SplashScreen());
   }
 }
